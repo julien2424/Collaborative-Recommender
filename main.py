@@ -1,7 +1,5 @@
 import numpy as np
 import csv
-from sklearn.metrics.pairwise import cosine_similarity
-from scipy import sparse
 from movie_rating_object import MovieRatingObject
 from scipy import spatial
 
@@ -39,18 +37,23 @@ class Similarity:
 
     def get_cosine(self):
         result_dict = {}
-        # self.matrix = self.matrix.transpose()
+        mu = "movie"  # "movie"
+        self.matrix = self.matrix.transpose()
 
-        for i in range(0, 4):
+        for i in range(1, 11):
             top_5 = [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0]]
             for j in range(0, len(self.matrix)):
                 if i != j:
                     result = 1 - spatial.distance.cosine(self.matrix[i], self.matrix[j])
-                    top_5.append([j, result])
+                    if result != 1:
+                        top_5.append([j, result])
+                    else:
+                        top_5.append([j, 0])
                     top_5.sort(key=lambda x: x[1])
                     top_5 = top_5[1:]
             result_dict[i] = top_5
-        print(result_dict)
+        for key, value in result_dict.items():
+            print(f"{mu} {key} was most similar to {mu}s {value[4][0]}, {value[3][0]}, {value[2][0]}, {value[1][0]}, {value[0][0]} in that order.")
 
 
 if __name__ == '__main__':
