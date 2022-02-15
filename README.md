@@ -6,7 +6,7 @@
 4. Run ```if __name__ == '__main__':``` in ```main.py```
 
 ### Similarity in Movies
-![](images/movie.png)
+![](images/movie.PNG)
 
 ### Similarity in Users (User 0 is user I created)
 ![](images/user.PNG)
